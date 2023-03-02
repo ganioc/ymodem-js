@@ -1,19 +1,19 @@
 {
 	"protocol": "ymodem",
-	"baudrate": 460800,
+	"baudrate": 115200,
 	"slave": {
 		"addr": 80,
 		"port": "/dev/tty.usbserial-14210"
 	},
 	"file": {
-		"name": "./bin/L072cbos.bin",
-		"symbol": "L072cbos.bin"
+		"name": "./bin/fmoled415-8000.bin",
+		"symbol": "fmoled415.bin"
 	},
 	"test": {
 		"port": "/dev/tty.usbserial-1420"
 	},
 	"tx": {
-		"port": "/dev/tty.usbserial-14110"
+		"port": "/dev/tty.usbserial-14130"
 	},
 	"rx": {
 		"port": "/dev/tty.usbserial-14130"
