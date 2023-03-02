@@ -6,14 +6,14 @@
 		"port": "/dev/tty.usbserial-14210"
 	},
 	"file": {
-		"name": "./bin/fmoled415-8000.bin",
+		"name": "./bin/fmo415.bin",
 		"symbol": "fmoled415.bin"
 	},
 	"test": {
 		"port": "/dev/tty.usbserial-1420"
 	},
 	"tx": {
-		"port": "/dev/tty.usbserial-14130"
+		"port": "/dev/tty.wchusbserial518501754801"
 	},
 	"rx": {
 		"port": "/dev/tty.usbserial-14130"
