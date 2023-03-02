@@ -258,7 +258,7 @@ async function main() {
       console.log("sync ok")
     } else {
       console.log("sync failed")
-      continue
+      process.exit(1);
     }
     let startTime = new Date();
 
