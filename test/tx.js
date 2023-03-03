@@ -42,6 +42,7 @@ async function syncWithClient(port, buf, times) {
   });
 }
 async function sendBlock0(port, id, fileName, fileLen){
+  let errors = 0;
   let blockZero = Packet.getNormalPacket(
     id,
     Packet.getZeroContent(fileName, fileLen));
