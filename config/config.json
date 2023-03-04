@@ -1,12 +1,12 @@
 {
 	"protocol": "ymodem",
-	"baudrate": 115200,
+	"baudrate": 921600,
 	"slave": {
 		"addr": 80,
 		"port": "/dev/tty.usbserial-14210"
 	},
 	"file": {
-		"name": "./bin/fmo415.bin",
+		"name": "./bin/fmo415-1658.bin",
 		"symbol": "fmoled415.bin"
 	},
 	"test": {
@@ -16,6 +16,6 @@
 		"port": "/dev/tty.wchusbserial518501754801"
 	},
 	"rx": {
-		"port": "/dev/tty.usbserial-14130"
+		"port": "/dev/tty.usbserial-14140"
 	}
 }

@@ -110,7 +110,7 @@ async function sendBlockFile(port, buf){
         return
       }
 
-      console.log("- Send block ", i / nInterval + 1);
+      console.log("\n- Send block ", i / nInterval + 1);
 
       let upper = (buf.length < i + nInterval) ? buf.length : i + nInterval;
       let payloadBuf = new Buffer.alloc(nInterval);
@@ -124,15 +124,16 @@ async function sendBlockFile(port, buf){
         payloadBuf
       )
 
-      // await DelayMs(10)
+      // await DelayMs(100)
       writeSerial(port, block);
 
       // receive ack
-      let result = await ReceivePacket(emData, serial.RxBuffer, 1, 500);
+      let result = await ReceivePacket(emData, serial.RxBuffer, 1, 1000);
       if (result.status == "OK") {
+        console.log("Got resp");
         printRxBuf(serial.RxBuffer, 1)
       } else {
-        console.log("no response")
+        console.log("Got no response")
         errors++;
         i -= nInterval;
         continue;
@@ -147,10 +148,15 @@ async function sendBlockFile(port, buf){
         console.log("no ACK")
         errors++;
         i -= 128;
+
+        if(errors > 5){
+          resolve("NOK")
+        }
+
         continue;
       }
       console.log("- Send block " + id +
-        " succceed!");
+        " succceed!\n");
     }
     resolve("OK")
   })
