@@ -22,7 +22,7 @@ const NORMAL_LEN = 128;
 const LONG_LEN = 1024;
 const DATA_INDEX = 3;
 
-let bUse1K = false;
+let bUse1K = true;
 
 function getNormalPacket(id, contentBuf) {
   let buf = new Buffer.alloc(NORMAL_LEN + 3 + 2);
