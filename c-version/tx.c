@@ -16,6 +16,7 @@
 #define FAILURE_UART   2
 #define FAILURE_ARGS   3
 #define FAILURE_YMODEM 4
+#define FAILURE_BIN    5
 #define FAILURE_CONFIG -1
 
 /* uart parameters */
@@ -31,20 +32,20 @@ static FILE *fp;
 static const struct option lopts[] = {
 	{ "device", required_argument, 0, 'D' },
 	{ "speed", optional_argument, 0, 'S' },
+	{ "bin", required_argument, 0, 'B'},
 	{ "verbose", optional_argument, 0, 'v' },
 	{ "hardflow", required_argument, 0, 'f' },
-    { "bin", required_argument, 0, 'b'},
 	{ NULL, 0, 0, 0 },
 };
 
 static void print_usage(const char *prog)
 {
-	printf("Usage: %s [-DSvfb]\n", prog);
+	printf("Usage: %s [-DSBvf]\n", prog);
 	puts("  -D --device    tty device to use\n"
 		 "  -S --speed     uart speed\n"
 		 "  -v --verbose   Verbose (show rx buffer)\n"
 		 "  -f --hardflow  open hardware flowcontrol\n"
-         "  -b --bin       bin file\n");
+         "  -B --bin       bin file\n");
 	exit(1);
 }
 
@@ -54,7 +55,7 @@ static void parse_opts(int argc, char *argv[])
 	int c;
 	
 	while (1) {
-		c = getopt_long(argc, argv, "D:S:vfbh", lopts, NULL);
+		c = getopt_long(argc, argv, "D:S:B:vfh", lopts, NULL);
 		if (c == -1) {
 			break;
 		}
@@ -73,7 +74,7 @@ static void parse_opts(int argc, char *argv[])
 		case 'f':
 			hardflow = 1;
 			break;	
-        case 'b':
+        case 'B':
             if (optarg != NULL)
                 bin = optarg;
             break;
@@ -287,12 +288,13 @@ static void sig_handler(int signo)
 }
 
 int main(int argc, char *argv[]){
-    int fd;
+    int fd, bin_fd;
 	int ret;
-	int times = 50;
+	int times = 5;
 	int num_bytes;
 	char read_buf[128];
 	int i = 0;
+	char bin_buffer[1024*256];
 
     printf("hello tx ymodem\n");
     printf("parse input args:\n");
@@ -319,6 +321,13 @@ int main(int argc, char *argv[]){
 		exit(FAILURE_UART);
 	}
 
+	bin_fd = open(bin, O_RDONLY);
+	if(bin_fd < 0){
+		return FAILURE_BIN;
+	}
+	/* read file out into a buffer */
+
+
 	while(times--){
 		num_bytes = read(fd, &read_buf, sizeof(read_buf));
 		printf("num_bytes: %d\n", num_bytes);
@@ -329,6 +338,8 @@ int main(int argc, char *argv[]){
 		
 	}
 
+	close(fd);
+	close(bin_fd);
 
     return SUCCESS;
 }
