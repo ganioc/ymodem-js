@@ -223,7 +223,7 @@ static int libtty_setopt(int fd, int speed, int databits, int stopbits, char par
 			break;
 		case 115200:
 		default:
-			baudrate = B1152000;
+			baudrate = B115200;
 			break;
 	}
 
@@ -289,7 +289,7 @@ static void sig_handler(int signo)
 int main(int argc, char *argv[]){
     int fd;
 	int ret;
-	int times = 10;
+	int times = 50;
 
     printf("hello tx ymodem\n");
     printf("parse input args:\n");
@@ -318,6 +318,7 @@ int main(int argc, char *argv[]){
 
 	while(times--){
 		printf("send a byte\n");
+		write(fd, "33", 2);
 		sleep(1);
 	}
 
