@@ -5,6 +5,9 @@
 #include <linux/serial.h>
 
 #include <termios.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 
 #define SUCCESS        0
 #define FAILURE_UART   2
@@ -87,32 +90,7 @@ static void parse_opts(int argc, char *argv[])
  *
  * The function return 0 if success, or -1 if fail.
  */
-static int libtty_setcustombaudrate(int fd, int baudrate)
-{
-	struct termios2 tio;
 
-	if (ioctl(fd, TCGETS2, &tio)) {
-		perror("TCGETS2");
-		return -1;
-	}
-
-	tio.c_cflag &= ~CBAUD;
-	tio.c_cflag |= BOTHER;
-	tio.c_ispeed = baudrate;
-	tio.c_ospeed = baudrate;
-
-	if (ioctl(fd, TCSETS2, &tio)) {
-		perror("TCSETS2");
-		return -1;
-	}
-
-	if (ioctl(fd, TCGETS2, &tio)) {
-		perror("TCGETS2");
-		return -1;
-	}
-
-	return 0;
-}
 
 static int libtty_open(const char *devname)
 {
