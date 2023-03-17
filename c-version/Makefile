@@ -1,11 +1,13 @@
 CC := gcc
 
+PROJ = tx
+
 .PHONY: all clean
 
-all: tx
+all: $(PROJ)
 
-tx: tx.c
+$(PROJ): $(PROJ).c
 	$(CC) -g -O0 $< -o $@
 
 clean:
-	-rm -f tx.o tx 
+	-rm -f $(PROJ).o $(PROJ) 
