@@ -35,3 +35,8 @@ SOH 00 FF NUL[128] CRC CRC >>>>>>>>>>>>>>>>>>>>>>>
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<             ACK
 ```
 
+## C version
+c-version/tx.c, posix c version ymodem tx
+
+* arguments parsing, getopt.h
+* Linux serial port programming, 
