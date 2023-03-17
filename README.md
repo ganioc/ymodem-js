@@ -39,8 +39,12 @@ SOH 00 FF NUL[128] CRC CRC >>>>>>>>>>>>>>>>>>>>>>>
 c-version/tx.c, posix c version ymodem tx
 
 ```shell
-$ tx 
+$ make
+$ ./tx -D /dev/ttyUSB0 -S 115200 -b ../bin/lap421-0314-14.bin
+
 ```
 
 * arguments parsing, getopt.h
 * Linux serial port programming, 
+* test on rasp pi 4, /dev/ttyUSB0
+
