@@ -290,6 +290,9 @@ int main(int argc, char *argv[]){
     int fd;
 	int ret;
 	int times = 50;
+	int num_bytes;
+	char read_buf[128];
+	int i = 0;
 
     printf("hello tx ymodem\n");
     printf("parse input args:\n");
@@ -317,9 +320,13 @@ int main(int argc, char *argv[]){
 	}
 
 	while(times--){
-		printf("send a byte\n");
-		write(fd, "33", 2);
-		sleep(1);
+		num_bytes = read(fd, &read_buf, sizeof(read_buf));
+		printf("num_bytes: %d\n", num_bytes);
+		printf("rx:%s\n", read_buf);
+
+		printf("send a byte: %d\n", i++);
+		write(fd, "hi\r\n", 4);
+		
 	}
 
 
