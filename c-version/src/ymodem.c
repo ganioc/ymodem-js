@@ -1,4 +1,5 @@
 #include "ymodem.h"
+#include "packet.h"
 
 int sync_with_client(int fd_port, char *buffer, int timeout_times, int sync_times)
 {
@@ -13,7 +14,7 @@ int sync_with_client(int fd_port, char *buffer, int timeout_times, int sync_time
     if (result == 0)
     {
       print_rx_buf();
-      if (buffer[0] == Packet.CRC16)
+      if (buffer[0] == CRC16)
       {
         counter_sync++;
       }
@@ -34,4 +35,5 @@ int sync_with_client(int fd_port, char *buffer, int timeout_times, int sync_time
 
 int send_file(int fd_port, char *buffer, int len)
 {
+  return 0;
 }
