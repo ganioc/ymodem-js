@@ -18,6 +18,8 @@
 #define FAILURE_BIN 5
 #define FAILURE_CONFIG -1
 
+#define BIN_BUFFER_SIZE (1024 * 256)
+
 /* uart parameters */
 static char *device = "/dev/ttyUSB0";
 static int speed = 115200;
@@ -301,7 +303,8 @@ int main(int argc, char *argv[])
 	int num_bytes;
 	char read_buf[128];
 	int i = 0;
-	char bin_buffer[1024 * 256];
+	char bin_buffer[BIN_BUFFER_SIZE];
+	int read_index = 0, read_len_finished = 0;
 
 	printf("hello tx ymodem\n");
 	printf("parse input args:\n");
@@ -345,12 +348,25 @@ int main(int argc, char *argv[])
 		printf("open bin file succeed!\n");
 	}
 	/* read file out into a buffer */
+	while ((read_index = read(bin_fd, bin_buffer + read_len_finished, BIN_BUFFER_SIZE - read_len_finished)) > 0)
+	{
+		// ret_out = write(output_fd, &buffer, (ssize_t)ret_in);
+		// if (ret_out != ret_in)
+		// {
+		// 	/* Write error */
+		// 	perror("write");
+		// 	return 4;
+		// }
+		printf("read_index: %d\n", read_index);
+		read_len_finished += read_index;
+	}
+	printf("read_len_finished: %d\n", read_len_finished);
 
 	while (times--)
 	{
 		num_bytes = read(fd, &read_buf, sizeof(read_buf));
-		printf("num_bytes: %d\n", num_bytes);
-		printf("rx:%s\n", read_buf);
+		printf("To receive num_bytes: %d\n", num_bytes);
+		printf("rx: %s\n", read_buf);
 
 		printf("send a byte: %d\n", i++);
 		write(fd, "hi\r\n", 4);

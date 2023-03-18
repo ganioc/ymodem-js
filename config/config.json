@@ -13,9 +13,9 @@
 		"port": "/dev/tty.usbserial-1420"
 	},
 	"tx": {
-		"port": "/dev/tty.wchusbserial558500158501"
+		"port": "/dev/ttyUSB0"
 	},
 	"rx": {
-		"port": "/dev/tty.usbserial-14140"
+		"port": "/dev/ttyUSB1"
 	}
 }
