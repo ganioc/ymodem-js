@@ -16,8 +16,12 @@
 #define FAILURE_ARGS 3
 #define FAILURE_YMODEM 4
 #define FAILURE_BIN 5
+#define FAILURE_SYNC 6
+#define FAILURE_SEND 7
+
 #define FAILURE_CONFIG -1
 
+/* we will not have bin file size bigger than 256KB */
 #define BIN_BUFFER_SIZE (1024 * 256)
 
 /* uart parameters */
@@ -362,15 +366,44 @@ int main(int argc, char *argv[])
 	}
 	printf("read_len_finished: %d\n", read_len_finished);
 
-	while (times--)
-	{
-		num_bytes = read(fd, &read_buf, sizeof(read_buf));
-		printf("To receive num_bytes: %d\n", num_bytes);
-		printf("rx: %s\n", read_buf);
+	printf("\nBegin to download\n");
 
-		printf("send a byte: %d\n", i++);
-		write(fd, "hi\r\n", 4);
+	while (1)
+	{
+		int result = sync_with_client(fd, bin_buffer, 10, 2);
+		printf("result: %d\n", result);
+
+		if (result == 0)
+		{
+			printf("sync ok\n");
+		}
+		else
+		{
+			printf("sync failed\n");
+			return (FAILURE_SYNC);
+		}
+
+		result = send_file(fd, bin_buffer, read_len_finished);
+		if (result == 0)
+		{
+			printf("=============Send file completed===========\n");
+			return SUCCESS;
+		}
+		else
+		{
+			printf("send file failed\n");
+			return FAILURE_SEND;
+		}
 	}
+	// while (times--)
+	// {
+	// 	num_bytes = read(fd, &read_buf, sizeof(read_buf));
+	// 	printf("To receive num_bytes: %d\n", num_bytes);
+	// 	printf("rx: %s\n", read_buf);
+
+	// 	printf("send a byte: %d\n", i++);
+	// 	write(fd, "hi\r\n", 4);
+	// }
 
 	close(fd);
 	close(bin_fd);

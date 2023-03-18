@@ -39,7 +39,11 @@ SOH 00 FF NUL[128] CRC CRC >>>>>>>>>>>>>>>>>>>>>>>
 c-version/tx.c, posix c version ymodem tx
 
 ```shell
+$ mkdir build
+$ cd build
+$ cmake ..
 $ make
+$ 
 $ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin
 
 ```
