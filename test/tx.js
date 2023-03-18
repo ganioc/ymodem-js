@@ -1,7 +1,7 @@
 // transmit to rx.js using ymodem protocol,
 "use strict";
 
-const {SerialPort} = require('serialport')
+const { SerialPort } = require('serialport')
 const fs = require('fs')
 const Config = require("../config/config.json")
 const Packet = require("../packet")
@@ -17,7 +17,7 @@ const writeSerial = serial.WriteSerial;
 const ReceivePacket = serial.ReadSerial;
 
 
-async function syncWithClient(port, buf, times) {
+async function syncWithClient (port, buf, times) {
   let counter_sync = 0;
   let counter_timeout = 0
   return new Promise(async (resolve) => {
@@ -34,14 +34,14 @@ async function syncWithClient(port, buf, times) {
           resolve("OK")
           return
         }
-      }else{
+      } else {
         counter_timeout++
       }
     }
     resolve("NOK")
   });
 }
-async function sendBlock0(port, id, fileName, fileLen){
+async function sendBlock0 (port, id, fileName, fileLen) {
   let errors = 0;
   let blockZero = Packet.getNormalPacket(
     id,
@@ -70,7 +70,7 @@ async function sendBlock0(port, id, fileName, fileLen){
     resolve("NOK")
   })
 }
-async function sendBlockEOT(port){
+async function sendBlockEOT (port) {
   console.log("-- Send EOT")
 
   return new Promise(async (resolve) => {
@@ -97,11 +97,11 @@ async function sendBlockEOT(port){
     resolve("OK")
   });
 }
-async function sendBlockFile(port, buf){
+async function sendBlockFile (port, buf) {
   let errors = 0;
   const nInterval = (Packet.BUse1K == true) ? 1024 : 128;
 
-  return new Promise(async (resolve)=>{
+  return new Promise(async (resolve) => {
 
     for (let i = 0; i < buf.length; i += nInterval) {
       if (errors > 5) {
@@ -147,9 +147,9 @@ async function sendBlockFile(port, buf){
       else if (serial.RxBuffer[0] !== Packet.ACK) {
         console.log("no ACK")
         errors++;
-        i -= 128;
+        i -= nInterval;
 
-        if(errors > 5){
+        if (errors > 5) {
           resolve("NOK")
         }
 
@@ -161,14 +161,14 @@ async function sendBlockFile(port, buf){
     resolve("OK")
   })
 }
-async function sendBlockLast(port){
+async function sendBlockLast (port) {
   let blockLast = Packet.getNormalPacket(
     0,
     new Buffer.alloc(128)
   )
   console.log("Send last block to finish session")
 
-  return new Promise(async (resolve)=>{
+  return new Promise(async (resolve) => {
     let errors = 0;
     do {
       if (errors > 3) {
@@ -190,7 +190,7 @@ async function sendBlockLast(port){
     resolve("OK")
   })
 }
-async function sendFileAsync(port, binBuf) {
+async function sendFileAsync (port, binBuf) {
   let id = 0;
   let errors = 0;
 
@@ -202,18 +202,18 @@ async function sendFileAsync(port, binBuf) {
       console.log("-- Send block 0 failed")
       resolve("-1")
       return;
-    } 
+    }
 
     // id++
     result = await sendBlockFile(port, binBuf);
-    if(result !== "OK"){
+    if (result !== "OK") {
       console.log("-- send files failed")
       resolve("NOK")
       return
     }
 
     result = await sendBlockEOT(port)
-    if(result !==  "OK"){
+    if (result !== "OK") {
       console.log("-- Send block EOT failed")
       resolve("NOK")
       return;
@@ -221,7 +221,7 @@ async function sendFileAsync(port, binBuf) {
 
     // Send last block
     result = await sendBlockLast(port)
-    if(result !==  "OK"){
+    if (result !== "OK") {
       console.log("-- Send block last failed")
       resolve("NOK")
       return;
@@ -232,7 +232,7 @@ async function sendFileAsync(port, binBuf) {
   })
 }
 
-async function main() {
+async function main () {
   console.log("-- TX --");
   console.log("use Ymodem 1k: ", Packet.BUse1K);
   printConfig(Config)
@@ -243,7 +243,7 @@ async function main() {
     dataBits: 8,
     stopBits: 1,
     parity: 'none',
-    });
+  });
 
   port.on("data", (data) => {
     emData.emit("data", data);
@@ -260,7 +260,7 @@ async function main() {
   console.log("Begin to download");
 
   while (true) {
-    let result = await syncWithClient(port, serial.RxBuffer ,2)
+    let result = await syncWithClient(port, serial.RxBuffer, 2)
     if (result == "OK") {
       console.log("sync ok")
     } else {

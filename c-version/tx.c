@@ -11,6 +11,8 @@
 
 #include <time.h>
 
+#include "ymodem.h"
+
 #define SUCCESS 0
 #define FAILURE_UART 2
 #define FAILURE_ARGS 3
@@ -309,6 +311,7 @@ int main(int argc, char *argv[])
 	int i = 0;
 	char bin_buffer[BIN_BUFFER_SIZE];
 	int read_index = 0, read_len_finished = 0;
+	int status = SUCCESS;
 
 	printf("hello tx ymodem\n");
 	printf("parse input args:\n");
@@ -327,7 +330,9 @@ int main(int argc, char *argv[])
 	if (fd < 0)
 	{
 		printf("libtty_open: %s error.\n", device);
-		exit(FAILURE_UART);
+		// exit(FAILURE_UART);
+		status = FAILURE_UART;
+		goto tag_end;
 	}
 
 	ret = libtty_setopt(fd, speed, 8, 1, 'n', hardflow);
@@ -335,6 +340,8 @@ int main(int argc, char *argv[])
 	{
 		printf("libtty_setopt error.\n");
 		exit(FAILURE_UART);
+		status = FAILURE_UART;
+		goto tag_set_tty;
 	}
 	else
 	{
@@ -344,8 +351,9 @@ int main(int argc, char *argv[])
 	bin_fd = open(bin, O_RDONLY);
 	if (bin_fd < 0)
 	{
-		printf("opne bin file failed: %d\n", bin_fd);
-		return FAILURE_BIN;
+		printf("Open bin file failed: %d\n", bin_fd);
+		status = FAILURE_BIN;
+		goto tag_set_tty;
 	}
 	else
 	{
@@ -368,33 +376,33 @@ int main(int argc, char *argv[])
 
 	printf("\nBegin to download\n");
 
-	while (1)
+	int result = sync_with_client(fd, bin_buffer, 10, 2);
+	printf("result: %d\n", result);
+
+	if (result == 0)
 	{
-		int result = sync_with_client(fd, bin_buffer, 10, 2);
-		printf("result: %d\n", result);
-
-		if (result == 0)
-		{
-			printf("sync ok\n");
-		}
-		else
-		{
-			printf("sync failed\n");
-			return (FAILURE_SYNC);
-		}
-
-		result = send_file(fd, bin_buffer, read_len_finished);
-		if (result == 0)
-		{
-			printf("=============Send file completed===========\n");
-			return SUCCESS;
-		}
-		else
-		{
-			printf("send file failed\n");
-			return FAILURE_SEND;
-		}
+		printf("sync ok\n");
 	}
+	else
+	{
+		printf("sync failed\n");
+		status = FAILURE_SYNC;
+		goto tag_finished;
+	}
+
+	result = send_file(fd, bin_buffer, read_len_finished, bin);
+	if (result == 0)
+	{
+		printf("=============Send file completed===========\n");
+		status = SUCCESS;
+		goto tag_finished;
+	}
+	else
+	{
+		printf("send file failed\n");
+		status = FAILURE_SEND;
+	}
+
 	// while (times--)
 	// {
 	// 	num_bytes = read(fd, &read_buf, sizeof(read_buf));
@@ -404,9 +412,11 @@ int main(int argc, char *argv[])
 	// 	printf("send a byte: %d\n", i++);
 	// 	write(fd, "hi\r\n", 4);
 	// }
-
-	close(fd);
+tag_finished:
 	close(bin_fd);
+tag_set_tty:
+	close(fd);
+tag_end:
 
-	return SUCCESS;
+	return status;
 }

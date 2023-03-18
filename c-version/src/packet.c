@@ -3,10 +3,10 @@
 
 #include <stdint.h>
 
-void get_zero_content(char *fileSymbol, int fileLen, char *buf)
+int get_zero_content(char *fileSymbol, int fileLen, char *buf)
 {
   // char buf[128];
-  char fileLenBuf[32];
+  char fileLenBuf[64];
   int i = 0;
 
   for (int i = 0; i < 128; i++)
@@ -28,6 +28,7 @@ void get_zero_content(char *fileSymbol, int fileLen, char *buf)
   {
     buf[i++] = fileLenBuf[j];
   }
+  return i;
 }
 /* buf len = NORMAL_LEN + 3 + 2
  */

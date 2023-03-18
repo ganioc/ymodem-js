@@ -24,6 +24,8 @@ int receive_packet(int fd_port, char *buffer, int len, int timeout_secs)
   while (timeout_secs-- > 0)
   {
     num_bytes = read(fd_port, buffer + bytes_received, len - bytes_received);
+
+    printf("receive_packet, num: %d\n", num_bytes);
     bytes_received += num_bytes;
 
     if (header_touched == 0 && num_bytes > 0)

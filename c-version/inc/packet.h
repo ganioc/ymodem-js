@@ -37,7 +37,7 @@
 
 #define bUse1K 1
 
-void get_zero_content(char *fileSymbol, int fileLen, char *buf);
+int get_zero_content(char *fileSymbol, int fileLen, char *buf);
 void get_normal_packet(int id, char *contentBuf, int len, char *buf);
 void get_long_packet(int id, char *contentBuf, int len, char *buf);
 #endif
