@@ -11,12 +11,11 @@
 
 #include <time.h>
 
-
-#define SUCCESS        0
-#define FAILURE_UART   2
-#define FAILURE_ARGS   3
+#define SUCCESS 0
+#define FAILURE_UART 2
+#define FAILURE_ARGS 3
 #define FAILURE_YMODEM 4
-#define FAILURE_BIN    5
+#define FAILURE_BIN 5
 #define FAILURE_CONFIG -1
 
 /* uart parameters */
@@ -27,39 +26,39 @@ static int verbose = 0;
 static char *bin = "../bin/filename.bin.bin.bin.bin";
 static FILE *fp;
 
-
-
 static const struct option lopts[] = {
-	{ "device", required_argument, 0, 'D' },
-	{ "speed", optional_argument, 0, 'S' },
-	{ "bin", required_argument, 0, 'B'},
-	{ "verbose", optional_argument, 0, 'v' },
-	{ "hardflow", required_argument, 0, 'f' },
-	{ NULL, 0, 0, 0 },
+		{"device", required_argument, 0, 'D'},
+		{"speed", optional_argument, 0, 'S'},
+		{"bin", required_argument, 0, 'B'},
+		{"verbose", optional_argument, 0, 'v'},
+		{"hardflow", required_argument, 0, 'f'},
+		{NULL, 0, 0, 0},
 };
 
 static void print_usage(const char *prog)
 {
 	printf("Usage: %s [-DSBvf]\n", prog);
 	puts("  -D --device    tty device to use\n"
-		 "  -S --speed     uart speed\n"
-		 "  -v --verbose   Verbose (show rx buffer)\n"
-		 "  -f --hardflow  open hardware flowcontrol\n"
-         "  -B --bin       bin file\n");
+			 "  -S --speed     uart speed\n"
+			 "  -v --verbose   Verbose (show rx buffer)\n"
+			 "  -f --hardflow  open hardware flowcontrol\n"
+			 "  -B --bin       bin file\n");
 	exit(1);
 }
-
 
 static void parse_opts(int argc, char *argv[])
 {
 	int c;
-	
-	while (1) {
+
+	while (1)
+	{
 		c = getopt_long(argc, argv, "D:S:B:vfh", lopts, NULL);
-		if (c == -1) {
+		if (c == -1)
+		{
 			break;
 		}
-		switch (c) {
+		switch (c)
+		{
 		case 'D':
 			if (optarg != NULL)
 				device = optarg;
@@ -73,11 +72,11 @@ static void parse_opts(int argc, char *argv[])
 			break;
 		case 'f':
 			hardflow = 1;
-			break;	
-        case 'B':
-            if (optarg != NULL)
-                bin = optarg;
-            break;
+			break;
+		case 'B':
+			if (optarg != NULL)
+				bin = optarg;
+			break;
 		case 'h':
 		default:
 			print_usage(argv[0]);
@@ -144,96 +143,102 @@ static int libtty_setopt(int fd, int speed, int databits, int stopbits, char par
 	struct termios oldtio;
 	int i;
 	speed_t baudrate;
-	
+
 	bzero(&newtio, sizeof(newtio));
 	bzero(&oldtio, sizeof(oldtio));
-	
-	if (tcgetattr(fd, &oldtio) != 0) {
-		perror("tcgetattr");    
-		return -1; 
+
+	if (tcgetattr(fd, &oldtio) != 0)
+	{
+		perror("tcgetattr");
+		return -1;
 	}
 	newtio.c_cflag |= CLOCAL | CREAD;
 	newtio.c_cflag &= ~CSIZE;
- 
+
 	/* set data bits */
-	switch (databits) {
-	case 5:                
+	switch (databits)
+	{
+	case 5:
 		newtio.c_cflag |= CS5;
 		break;
-	case 6:                
+	case 6:
 		newtio.c_cflag |= CS6;
 		break;
-	case 7:                
+	case 7:
 		newtio.c_cflag |= CS7;
 		break;
-	case 8:    
+	case 8:
 		newtio.c_cflag |= CS8;
-		break;  
-	default:   
+		break;
+	default:
 		fprintf(stderr, "unsupported data size\n");
-		return -1; 
-	}
-	
-	/* set parity */
-	switch (parity) {  
-	case 'n':
-	case 'N':
-		newtio.c_cflag &= ~PARENB;    /* Clear parity enable */
-		newtio.c_iflag &= ~INPCK;     /* Disable input parity check */
-		break; 
-	case 'o':  
-	case 'O':    
-		newtio.c_cflag |= (PARODD | PARENB); /* Odd parity instead of even */
-		newtio.c_iflag |= INPCK;     /* Enable input parity check */
-		break; 
-	case 'e': 
-	case 'E':  
-		newtio.c_cflag |= PARENB;    /* Enable parity */   
-		newtio.c_cflag &= ~PARODD;   /* Even parity instead of odd */  
-		newtio.c_iflag |= INPCK;     /* Enable input parity check */
-		break;
-	default:  
-		fprintf(stderr, "unsupported parity\n");
-		return -1; 
-	} 
-	
-	/* set stop bits */ 
-	switch (stopbits) {  
-	case 1:   
-		newtio.c_cflag &= ~CSTOPB; 
-		break;
-	case 2:   
-		newtio.c_cflag |= CSTOPB; 
-		break;
-	default:   
-		perror("unsupported stop bits\n"); 
 		return -1;
 	}
- 
+
+	/* set parity */
+	switch (parity)
+	{
+	case 'n':
+	case 'N':
+		newtio.c_cflag &= ~PARENB; /* Clear parity enable */
+		newtio.c_iflag &= ~INPCK;	 /* Disable input parity check */
+		break;
+	case 'o':
+	case 'O':
+		newtio.c_cflag |= (PARODD | PARENB); /* Odd parity instead of even */
+		newtio.c_iflag |= INPCK;						 /* Enable input parity check */
+		break;
+	case 'e':
+	case 'E':
+		newtio.c_cflag |= PARENB;	 /* Enable parity */
+		newtio.c_cflag &= ~PARODD; /* Even parity instead of odd */
+		newtio.c_iflag |= INPCK;	 /* Enable input parity check */
+		break;
+	default:
+		fprintf(stderr, "unsupported parity\n");
+		return -1;
+	}
+
+	/* set stop bits */
+	switch (stopbits)
+	{
+	case 1:
+		newtio.c_cflag &= ~CSTOPB;
+		break;
+	case 2:
+		newtio.c_cflag |= CSTOPB;
+		break;
+	default:
+		perror("unsupported stop bits\n");
+		return -1;
+	}
+
 	if (hardflow)
 		newtio.c_cflag |= CRTSCTS;
 	else
 		newtio.c_cflag &= ~CRTSCTS;
- 
-	newtio.c_cc[VTIME] = 10;	/* Time-out value (tenths of a second) [!ICANON]. */
-	newtio.c_cc[VMIN] = 0;	/* Minimum number of bytes read at once [!ICANON]. */
 
-	switch(speed){
-		case 9600:
-			baudrate = B9600;
-			break;
-		case 115200:
-		default:
-			baudrate = B115200;
-			break;
+	newtio.c_cc[VTIME] = 10; /* Time-out value (tenths of a second) [!ICANON]. */
+	newtio.c_cc[VMIN] = 0;	 /* Minimum number of bytes read at once [!ICANON]. */
+
+	switch (speed)
+	{
+	case 9600:
+		baudrate = B9600;
+		break;
+	case 115200:
+	default:
+		baudrate = B115200;
+		break;
 	}
 
 	cfsetispeed(&newtio, baudrate);
 	cfsetospeed(&newtio, baudrate);
-	
-	tcflush(fd, TCIOFLUSH);  
-	
-	if (tcsetattr(fd, TCSANOW, &newtio) != 0) {
+
+	tcflush(fd, TCIOFLUSH);
+
+	if (tcsetattr(fd, TCSANOW, &newtio) != 0)
+	{
 		perror("tcsetattr");
 		return -1;
 	}
@@ -244,42 +249,43 @@ static int libtty_setopt(int fd, int speed, int databits, int stopbits, char par
 	// 	return -1;
 	// }
 
-
-
-
 	return 0;
 }
 
 static int libtty_open(const char *devname)
 {
-	int fd = open(devname, O_RDWR | O_NOCTTY | O_NDELAY); 
+	int fd = open(devname, O_RDWR | O_NOCTTY | O_NDELAY);
 	int flags = 0;
-	
-	if (fd < 0) {                        
+
+	if (fd < 0)
+	{
 		perror("open device failed");
-		return -1;            
+		return -1;
 	}
-	
+
 	flags = fcntl(fd, F_GETFL, 0);
 	flags &= ~O_NONBLOCK;
-	if (fcntl(fd, F_SETFL, flags) < 0) {
+	if (fcntl(fd, F_SETFL, flags) < 0)
+	{
 		printf("fcntl failed.\n");
 		return -1;
 	}
-		
-	if (isatty(fd) == 0) {
+
+	if (isatty(fd) == 0)
+	{
 		printf("not tty device.\n");
 		return -1;
 	}
 	else
 		printf("tty device test ok.\n");
-	
+
 	return fd;
 }
 static void sig_handler(int signo)
 {
-    printf("capture sign no:%d\n",signo);
-	if (fp != NULL) {
+	printf("capture sign no:%d\n", signo);
+	if (fp != NULL)
+	{
 		fflush(fp);
 		fsync(fileno(fp));
 		fclose(fp);
@@ -287,59 +293,71 @@ static void sig_handler(int signo)
 	exit(0);
 }
 
-int main(int argc, char *argv[]){
-    int fd, bin_fd;
+int main(int argc, char *argv[])
+{
+	int fd, bin_fd;
 	int ret;
 	int times = 5;
 	int num_bytes;
 	char read_buf[128];
 	int i = 0;
-	char bin_buffer[1024*256];
+	char bin_buffer[1024 * 256];
 
-    printf("hello tx ymodem\n");
-    printf("parse input args:\n");
+	printf("hello tx ymodem\n");
+	printf("parse input args:\n");
 
-    parse_opts(argc, argv);
+	parse_opts(argc, argv);
 
-    printf("device: %s\n", device);
-    printf("speed: %d\n",  speed);
-    printf("verbose: %d\n", verbose);
-    printf("hardflow: %d\n", hardflow);
-    printf("bin: %s\n", bin);
+	printf("device: %s\n", device);
+	printf("speed: %d\n", speed);
+	printf("verbose: %d\n", verbose);
+	printf("hardflow: %d\n", hardflow);
+	printf("bin: %s\n", bin);
 
-    signal(SIGINT, sig_handler); 
+	signal(SIGINT, sig_handler);
 
-    fd = libtty_open(device);
-	if (fd < 0) {
+	fd = libtty_open(device);
+	if (fd < 0)
+	{
 		printf("libtty_open: %s error.\n", device);
 		exit(FAILURE_UART);
 	}
 
 	ret = libtty_setopt(fd, speed, 8, 1, 'n', hardflow);
-	if (ret != 0) {
+	if (ret != 0)
+	{
 		printf("libtty_setopt error.\n");
 		exit(FAILURE_UART);
 	}
+	else
+	{
+		printf("libtty setting OK\n");
+	}
 
 	bin_fd = open(bin, O_RDONLY);
-	if(bin_fd < 0){
+	if (bin_fd < 0)
+	{
+		printf("opne bin file failed: %d\n", bin_fd);
 		return FAILURE_BIN;
+	}
+	else
+	{
+		printf("open bin file succeed!\n");
 	}
 	/* read file out into a buffer */
 
-
-	while(times--){
+	while (times--)
+	{
 		num_bytes = read(fd, &read_buf, sizeof(read_buf));
 		printf("num_bytes: %d\n", num_bytes);
 		printf("rx:%s\n", read_buf);
 
 		printf("send a byte: %d\n", i++);
 		write(fd, "hi\r\n", 4);
-		
 	}
 
 	close(fd);
 	close(bin_fd);
 
-    return SUCCESS;
+	return SUCCESS;
 }
