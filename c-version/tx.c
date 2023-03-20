@@ -376,7 +376,7 @@ int main(int argc, char *argv[])
 
 	printf("\nBegin to download\n");
 
-	int result = sync_with_client(fd, bin_buffer, 10, 2);
+	int result = sync_with_client(fd, 10, 2);
 	printf("result: %d\n", result);
 
 	if (result == 0)
@@ -389,6 +389,8 @@ int main(int argc, char *argv[])
 		status = FAILURE_SYNC;
 		goto tag_finished;
 	}
+
+	result = 
 
 	result = send_file(fd, bin_buffer, read_len_finished, bin);
 	if (result == 0)

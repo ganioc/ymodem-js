@@ -35,7 +35,7 @@ SOH 00 FF NUL[128] CRC CRC >>>>>>>>>>>>>>>>>>>>>>>
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<             ACK
 ```
 
-## C version
+## C version ymodem tx, same as 'npm run tx'
 c-version/tx.c, posix c version ymodem tx
 
 ```shell

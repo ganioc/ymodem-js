@@ -5,8 +5,10 @@
 
 #include <stdio.h>
 
-int sync_with_client(int fd_port, char *buffer, int timeout_times, int sync_times)
+int sync_with_client(int fd_port, int timeout_times, int sync_times)
 {
+  char buffer[3];
+
   int counter_sync = 0;
   int counter_timeout = 0;
 
@@ -38,8 +40,8 @@ int sync_with_client(int fd_port, char *buffer, int timeout_times, int sync_time
 }
 static int sendBlock0(int port, int id, char *fileName, int fileLen)
 {
-  char filename_len_buf[128];
-  char buf[128 + 2 + 3];
+  char filename_len_buf[128]={0};
+  char buf[128 + 2 + 3] = {0};
   int file_name_len_buf_size = 0;
 
   file_name_len_buf_size = get_zero_content(fileName, fileLen, filename_len_buf);
@@ -48,7 +50,11 @@ static int sendBlock0(int port, int id, char *fileName, int fileLen)
 
   printf("buf size: %d\n", sizeof(buf));
 
+  printf("- Send out blockZero\n");
+
   write(port, buf, sizeof(buf));
+
+  print_rx_buf(buf, sizeof(buf));
 
   int len = receive_packet(port, buf, 2, 2);
   if (len == 2 && buf[0] == ACK && buf[1] == CRC16)
@@ -79,6 +85,10 @@ static int sendBlockFile(int fd_port, char *buf, int len)
     {
       printf("Sending blocks failed\n");
       return -1;
+    }
+    for(int m = 0; m< 1024+5; m++){
+      payloadBuf[m] = 0;
+      block[m] = 0;
     }
 
     printf("\n- Send block: %d\n", i / nInterval + 1);
@@ -217,6 +227,8 @@ int send_file(int fd_port, char *buffer, int len, char *fileName)
   {
     printf("-- Send block 0 failed\n");
     return -1;
+  }else{
+    printf("--- send block 0 finished\n");
   }
   // id++
   result = sendBlockFile(fd_port, buffer, len);

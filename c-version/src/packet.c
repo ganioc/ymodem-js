@@ -28,7 +28,7 @@ int get_zero_content(char *fileSymbol, int fileLen, char *buf)
   {
     buf[i++] = fileLenBuf[j];
   }
-  return i;
+  return 128;
 }
 /* buf len = NORMAL_LEN + 3 + 2
  */

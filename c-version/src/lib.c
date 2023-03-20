@@ -10,7 +10,7 @@ void print_rx_buf(char *buffer, int len)
     printf("0x%02X: ", i);
     for (int j = i; j < upper; j++)
     {
-      printf("%03X ", buffer[j]);
+      printf("%02x ", buffer[j]);
     }
     printf("\n");
   }
