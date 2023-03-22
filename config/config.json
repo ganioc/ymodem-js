@@ -6,14 +6,14 @@
 		"port": "/dev/tty.usbserial-14210"
 	},
 	"file": {
-		"name": "./bin/lamp421-0314.bin",
+		"name": "./bin/lamp421-0322-ota.bin",
 		"symbol": "lamp421.bin"
 	},
 	"test": {
 		"port": "/dev/tty.usbserial-1420"
 	},
 	"tx": {
-		"port": "/dev/ttyUSB0"
+		"port": "/dev/tty.wchusbserial558500158501"
 	},
 	"rx": {
 		"port": "/dev/ttyUSB1"
