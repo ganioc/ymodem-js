@@ -26,7 +26,7 @@ int receive_packet(int fd_port, char *buffer, int len, int timeout_secs)
   {
     num_bytes = read(fd_port, buffer + bytes_received, len - bytes_received);
 
-    printf("receive_packet, num: %d\n", num_bytes);
+    PRINTF("receive_packet, num: %d\n", num_bytes);
     bytes_received += num_bytes;
 
     if (header_touched == 0 && num_bytes > 0)
@@ -44,8 +44,8 @@ int receive_packet(int fd_port, char *buffer, int len, int timeout_secs)
 
     if (bytes_received >= len_expected)
     {
-      printf("Received Packet len: %d\n", bytes_received);
-      print_rx_buf(buffer, bytes_received);
+      PRINTF("Received Packet len: %d\n", bytes_received);
+      PRINT_RX_BUF(buffer, bytes_received);
       return len_expected;
     }
   }

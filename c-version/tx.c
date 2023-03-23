@@ -12,6 +12,7 @@
 #include <time.h>
 
 #include "ymodem.h"
+#include "lib.h"
 
 #define SUCCESS 0
 #define FAILURE_UART 2
@@ -285,7 +286,7 @@ static int libtty_open(const char *devname)
 		return -1;
 	}
 	else
-		printf("tty device test ok.\n");
+		PRINTF("tty device test ok.\n");
 
 	return fd;
 }
@@ -313,16 +314,16 @@ int main(int argc, char *argv[])
 	int read_index = 0, read_len_finished = 0;
 	int status = SUCCESS;
 
-	printf("hello tx ymodem\n");
-	printf("parse input args:\n");
+	PRINTF("hello tx ymodem\n");
+	PRINTF("parse input args:\n");
 
 	parse_opts(argc, argv);
 
-	printf("device: %s\n", device);
-	printf("speed: %d\n", speed);
-	printf("verbose: %d\n", verbose);
-	printf("hardflow: %d\n", hardflow);
-	printf("bin: %s\n", bin);
+	PRINTF("device: %s\n", device);
+	PRINTF("speed: %d\n", speed);
+	PRINTF("verbose: %d\n", verbose);
+	PRINTF("hardflow: %d\n", hardflow);
+	PRINTF("bin: %s\n", bin);
 
 	signal(SIGINT, sig_handler);
 
@@ -345,7 +346,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("libtty setting OK\n");
+		PRINTF("libtty setting OK\n");
 	}
 
 	bin_fd = open(bin, O_RDONLY);
@@ -357,7 +358,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("open bin file succeed!\n");
+		PRINTF("open bin file succeed!\n");
 	}
 	/* read file out into a buffer */
 	while ((read_index = read(bin_fd, bin_buffer + read_len_finished, BIN_BUFFER_SIZE - read_len_finished)) > 0)
@@ -369,19 +370,19 @@ int main(int argc, char *argv[])
 		// 	perror("write");
 		// 	return 4;
 		// }
-		printf("read_index: %d\n", read_index);
+		PRINTF("read_index: %d\n", read_index);
 		read_len_finished += read_index;
 	}
-	printf("read_len_finished: %d\n", read_len_finished);
+	PRINTF("read_len_finished: %d\n", read_len_finished);
 
-	printf("\nBegin to download\n");
+	printf("Begin to download\n");
 
 	int result = sync_with_client(fd, 10, 2);
-	printf("result: %d\n", result);
+	PRINTF("result: %d\n", result);
 
 	if (result == 0)
 	{
-		printf("sync ok\n");
+		PRINTF("sync ok\n");
 	}
 	else
 	{

@@ -38,6 +38,7 @@ SOH 00 FF NUL[128] CRC CRC >>>>>>>>>>>>>>>>>>>>>>>
 ## C version ymodem tx, same as 'npm run tx'
 c-version/tx.c, posix c version ymodem tx
 
+### Ccmake
 ```shell
 $ mkdir build
 $ cd build
@@ -52,3 +53,10 @@ $ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin
 * Linux serial port programming, 
 * test on rasp pi 4, /dev/ttyUSB0
 
+
+### make
+
+```
+$ make
+$ ./output/tx -D /dev/ttyACM0 -S 115200 -B ../bin/lamp421-0322-ota.bin
+```

@@ -5,4 +5,7 @@
 
 void print_rx_buf(char *buffer, int len);
 
+#define PRINT_RX_BUF(buffer,len)
+#define PRINTF(...)
+
 #endif

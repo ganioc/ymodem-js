@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "lib.h"
+
 int get_zero_content(char *fileSymbol, int fileLen, char *buf)
 {
   // char buf[128];
@@ -64,7 +66,7 @@ void get_normal_packet(int id, char *contentBuf, int len, char *buf)
   buf[i++] = (crc >> 8) & 0xFF;
   buf[i++] = crc & 0xFF;
 
-  printf("packet forming End i= %d\n", i);
+  PRINTF("packet forming End i= %d\n", i);
 }
 
 void get_long_packet(int id, char *contentBuf, int len, char *buf)
@@ -101,5 +103,5 @@ void get_long_packet(int id, char *contentBuf, int len, char *buf)
   buf[i++] = (crc >> 8) & 0xFF;
   buf[i++] = crc & 0xFF;
 
-  printf("packet forming end i = %d\n", i);
+  PRINTF("packet forming end i = %d\n", i);
 }

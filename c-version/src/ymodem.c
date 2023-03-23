@@ -15,12 +15,12 @@ int sync_with_client(int fd_port, int timeout_times, int sync_times)
 
   while (counter_timeout < timeout_times)
   {
-    printf("Sync with Rx counter: %d\n", counter_sync);
+    PRINTF("Sync with Rx counter: %d\n", counter_sync);
     int len = receive_packet(fd_port, buffer, 1, 1);
-    printf("sync len: %d\n", len);
+    PRINTF("sync len: %d\n", len);
     if (len == 1)
     {
-      print_rx_buf(buffer, 1);
+      PRINT_RX_BUF(buffer, 1);
       if (buffer[0] == CRC16)
       {
         counter_sync++;
@@ -49,23 +49,23 @@ static int sendBlock0(int port, int id, char *fileName, int fileLen)
 
   get_normal_packet(id, filename_len_buf, file_name_len_buf_size, buf);
 
-  printf("buf size: %ld\n", sizeof(buf));
+  PRINTF("buf size: %ld\n", sizeof(buf));
 
-  printf("- Send out blockZero\n");
+  PRINTF("- Send out blockZero\n");
 
   write(port, buf, sizeof(buf));
 
-  print_rx_buf(buf, sizeof(buf));
+  PRINT_RX_BUF(buf, sizeof(buf));
 
   int len = receive_packet(port, buf, 2, 2);
   if (len == 2 && buf[0] == ACK && buf[1] == CRC16)
   {
-    printf("Received ACK OK\n");
+    PRINTF("Received ACK OK\n");
     return 0;
   }
   else
   {
-    printf("Received wrong ACK\n");
+    printf("Received wrong blockZero ACK\n");
     return -1;
   }
 }
@@ -79,6 +79,7 @@ static int sendBlockFile(int fd_port, char *buf, int len)
   char payloadBuf[1024 + 5] = {0};
   char block[1024 + 5] = {0};
   char rxBuf[16];
+  int block_nums = (len/nInterval + 1);
 
   for (int i = 0; i < len; i += nInterval)
   {
@@ -92,7 +93,7 @@ static int sendBlockFile(int fd_port, char *buf, int len)
       block[m] = 0;
     }
 
-    printf("\n- Send block: %d\n", i / nInterval + 1);
+    PRINTF("\n- Send block: %d\n", i / nInterval + 1);
     int upper = (len < i + nInterval) ? len : i + nInterval;
     for (int j = i; j < upper; j++)
     {
@@ -104,20 +105,20 @@ static int sendBlockFile(int fd_port, char *buf, int len)
     {
       get_long_packet(id, payloadBuf, LONG_LEN, block);
       write(fd_port, block, LONG_LEN + 5);
-      print_rx_buf(block, LONG_LEN + 5);
+      PRINT_RX_BUF(block, LONG_LEN + 5);
     }
     else
     {
       get_normal_packet(id, payloadBuf, NORMAL_LEN, block);
       write(fd_port, block, NORMAL_LEN + 5);
-      print_rx_buf(block, NORMAL_LEN + 5);
+      PRINT_RX_BUF(block, NORMAL_LEN + 5);
     }
 
     int len = read(fd_port, rxBuf, 1);
     if (len == 1)
     {
-      printf("Got resp\n");
-      print_rx_buf(rxBuf, 1);
+      PRINTF("Got resp\n");
+      PRINT_RX_BUF(rxBuf, 1);
     }
     else
     {
@@ -145,14 +146,15 @@ static int sendBlockFile(int fd_port, char *buf, int len)
       }
       continue;
     }
-    printf("- Send block: %d succeed!\n", id);
+    PRINTF("- Send block: %d succeed!\n", id);
+    printf("%2d %%\r\n", id*100/block_nums);
   }
   return 0;
 }
 int sendBlockEOT(int fd_port)
 {
   char buf[1];
-  printf("-- Send EOT\n");
+  PRINTF("-- Send EOT\n");
 
   buf[0] = EOT;
   write(fd_port, buf, 1);
@@ -189,7 +191,7 @@ static int sendBlockLast(int fd_port)
 
   get_normal_packet(0, content, NORMAL_LEN, blockLast);
 
-  printf("Send last block to finish session\n");
+  PRINTF("Send last block to finish session\n");
 
   do
   {
@@ -199,12 +201,12 @@ static int sendBlockLast(int fd_port)
       return -1;
     }
     write(fd_port, blockLast, NORMAL_LEN + 5);
-    print_rx_buf(blockLast, NORMAL_LEN + 5);
+    PRINT_RX_BUF(blockLast, NORMAL_LEN + 5);
 
     int len = receive_packet(fd_port, rxBuf, 1, 1);
     if (len == 1 && rxBuf[0] == ACK)
     {
-      print_rx_buf(rxBuf, 1);
+      PRINT_RX_BUF(rxBuf, 1);
       break;
     }
     else
@@ -221,7 +223,7 @@ int send_file(int fd_port, char *buffer, int len, char *fileName)
   int result;
   int id = 0;
 
-  printf("send file() ...\n");
+  PRINTF("send file() ...\n");
 
   result = sendBlock0(fd_port, id, fileName, len);
   if (result != 0)
@@ -229,7 +231,7 @@ int send_file(int fd_port, char *buffer, int len, char *fileName)
     printf("-- Send block 0 failed\n");
     return -1;
   }else{
-    printf("--- send block 0 finished\n");
+    PRINTF("--- send block 0 finished\n");
   }
   // id++
   result = sendBlockFile(fd_port, buffer, len);
