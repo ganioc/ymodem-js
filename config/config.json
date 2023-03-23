@@ -6,7 +6,7 @@
 		"port": "/dev/tty.usbserial-14210"
 	},
 	"file": {
-		"name": "./bin/lamp421-all-0323.bin",
+		"name": "./bin/lamp421-0322-ota.bin",
 		"symbol": "lamp421.bin"
 	},
 	"test": {
