@@ -5,14 +5,14 @@ echo "merge 2 bins"
 PROJSTR="lamp421"
 echo "${PROJ_STR}"
 
-FILESIZE=$(expr 64 \* 1024)
+FILESIZE=$(expr 60 \* 1024)
 DATESTR=$(date +%m%d-%H%M)
 
 #OUTPUT="${PROJSTR}-combo-${DATESTR}.bin"
 OUTPUT="lamp421-all-0323.bin"
 
 INFILE1="../lampbl421-0323-none.bin"
-INFILE2="../lamp421-0320.bin"
+INFILE2="../lamp421-0322-ota.bin"
 
 INFILE1_SIZE=$(ls -l "${INFILE1}" | awk '{print $5}')
 INFILE2_SIZE=$(ls -l "${INFILE2}" | awk '{print $5}')
