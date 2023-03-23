@@ -149,7 +149,7 @@ static int libtty_setopt(int fd, int speed, int databits, int stopbits, char par
 {
 	struct termios newtio;
 	struct termios oldtio;
-	int i;
+	
 	speed_t baudrate;
 
 	bzero(&newtio, sizeof(newtio));
@@ -305,10 +305,10 @@ int main(int argc, char *argv[])
 {
 	int fd, bin_fd;
 	int ret;
-	int times = 5;
-	int num_bytes;
-	char read_buf[128];
-	int i = 0;
+	// int times = 5;
+	// int num_bytes;
+	// char read_buf[128];
+	// int i = 0;
 	char bin_buffer[BIN_BUFFER_SIZE];
 	int read_index = 0, read_len_finished = 0;
 	int status = SUCCESS;
@@ -389,8 +389,6 @@ int main(int argc, char *argv[])
 		status = FAILURE_SYNC;
 		goto tag_finished;
 	}
-
-	result = 
 
 	result = send_file(fd, bin_buffer, read_len_finished, bin);
 	if (result == 0)

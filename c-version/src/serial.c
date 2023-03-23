@@ -3,6 +3,7 @@
 #include "packet.h"
 
 #include <stdio.h>
+#include <unistd.h>
 
 /**
  * @brief
@@ -15,7 +16,7 @@
  */
 int receive_packet(int fd_port, char *buffer, int len, int timeout_secs)
 {
-  int rxIndex = 0;
+  // int rxIndex = 0;
   int len_expected = len;
   int num_bytes = 0;
   int bytes_received = 0;

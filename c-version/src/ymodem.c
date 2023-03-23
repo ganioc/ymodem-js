@@ -4,6 +4,7 @@
 #include "lib.h"
 
 #include <stdio.h>
+#include <unistd.h>
 
 int sync_with_client(int fd_port, int timeout_times, int sync_times)
 {
@@ -48,7 +49,7 @@ static int sendBlock0(int port, int id, char *fileName, int fileLen)
 
   get_normal_packet(id, filename_len_buf, file_name_len_buf_size, buf);
 
-  printf("buf size: %d\n", sizeof(buf));
+  printf("buf size: %ld\n", sizeof(buf));
 
   printf("- Send out blockZero\n");
 
@@ -112,7 +113,7 @@ static int sendBlockFile(int fd_port, char *buf, int len)
       print_rx_buf(block, NORMAL_LEN + 5);
     }
 
-    int len = read(fd_port, rxBuf, 1, 1);
+    int len = read(fd_port, rxBuf, 1);
     if (len == 1)
     {
       printf("Got resp\n");
