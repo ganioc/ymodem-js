@@ -9,9 +9,9 @@ FILESIZE=$(expr 60 \* 1024)
 DATESTR=$(date +%m%d-%H%M)
 
 #OUTPUT="${PROJSTR}-combo-${DATESTR}.bin"
-OUTPUT="lamp421-all-0323.bin"
+OUTPUT="lamp421-all-0327.bin"
 
-INFILE1="../lampbl421-0323-none.bin"
+INFILE1="../lampbl421-0327-none.bin"
 INFILE2="../lamp421-0322-ota.bin"
 
 INFILE1_SIZE=$(ls -l "${INFILE1}" | awk '{print $5}')
