@@ -1,6 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/pi/Documents/project/ymodem-js'
-make: Leaving directory '/home/pi/Documents/project/ymodem-js'
+make: Entering directory `/Users/yango3/Documents/mywork/ruff/power-brd/artery/AT32F415/IAP/ymodem/ymodem-js'
+make: Leaving directory `/Users/yango3/Documents/mywork/ruff/power-brd/artery/AT32F415/IAP/ymodem/ymodem-js'
  
 make: *** No targets specified and no makefile found.  Stop.
 

@@ -1,101 +1,98 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 4.2.1
-# Built for aarch64-unknown-linux-gnu
-# Copyright (C) 1988-2016 Free Software Foundation, Inc.
-# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-# This is free software: you are free to change and redistribute it.
-# There is NO WARRANTY, to the extent permitted by law.
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
 
-# Make data base, printed on Thu Mar 23 14:21:08 2023
+# This program built for i386-apple-darwin11.3.0
+
+# Make data base, printed on Mon Mar 27 16:05:44 2023
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
+# environment
+NVM_IOJS_ORG_MIRROR = https://iojs.org/dist
 # automatic
 ?F = $(notdir $?)
-# default
-.SHELLFLAGS := -c
 # environment
-XDG_SESSION_CLASS = user
-# environment
-VSCODE_AGENT_FOLDER = /home/pi/.vscode-server
-# environment
-XDG_SESSION_TYPE = tty
-# environment
-NVM_INC = /home/pi/.nvm/versions/node/v14.18.1/include/node
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# environment
+rvm_path = /Users/yango3/.rvm
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
-# default
-MAKE_VERSION := 4.2.1
 # makefile
-CURDIR := /home/pi/Documents/project/ymodem-js
+CURDIR := /Users/yango3/Documents/mywork/ruff/power-brd/artery/AT32F415/IAP/ymodem/ymodem-js
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /home/pi/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/node
+_ = /usr/bin/make
 # makefile
 MAKEFILE_LIST := 
-# 'override' directive
-GNUMAKEFLAGS := 
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+VSCODE_CWD = /
 # environment
-VSCODE_CWD = /home/pi
+PATH = ~/.cargo/bin:/Users/yango3/.nvm/versions/node/v12.22.0/bin:/Users/yango3/miniconda3/bin:/Users/yango3/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/Library/Apple/usr/bin:/Users/yango3/.cargo/bin:/Users/yango3/.rvm/bin
 # environment
-SSH_CONNECTION = 192.168.0.100 63761 192.168.0.104 22
+LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-PATH = /home/pi/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/bin/remote-cli:/home/pi/.nvm/versions/node/v14.18.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+NVM_BIN = /Users/yango3/.nvm/versions/node/v12.22.0/bin
 # environment
-XDG_RUNTIME_DIR = /run/user/1000
-# environment
-PICO_EXAMPLES_PATH = /home/pi/Documents/project/rasp-pico/pico/pico-examples
-# environment
-TEXTDOMAIN = Linux-PAM
-# environment
-NVM_BIN = /home/pi/.nvm/versions/node/v14.18.1/bin
+ZSH_CUSTOM = /Users/yango3/.zsh-custom
 # environment
 ELECTRON_RUN_AS_NODE = 1
-# environment
-VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-69062cd4-0d87-4860-8f72-069daae1c32d.sock
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-LS_COLORS = 
+LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.VCgYMwU4T5/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /home/pi/Documents/project/ymodem-js
-# default
-.LOADED := 
-# automatic
-*D = $(patsubst %/,%,$(dir $*))
+CONDA_EXE = /Users/yango3/miniconda3/bin/conda
+# environment
+rvm_bin_path = /Users/yango3/.rvm/bin
+# environment
+PWD = /Users/yango3/Documents/mywork/ruff/power-brd/artery/AT32F415/IAP/ymodem/ymodem-js
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /Users/yango3/.nvm/versions/node/v12.22.0/share/man:/Users/yango3/miniconda3/share/man:/usr/local/share/man:/usr/share/man:/Library/TeX/texbin/man:/Library/Apple/usr/share/man:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/pi
+HOME = /Users/yango3
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-PICO_EXTRAS_PATH = /home/pi/Documents/project/rasp-pico/pico/pico-extras
+VSCODE_CODE_CACHE_PATH = /Users/yango3/Library/Application Support/Code/CachedData/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884
 # environment
-LOGNAME = pi
+LOGNAME = yango3
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
-NVM_CD_FLAGS = 
-# automatic
-+F = $(notdir $+)
+CONDA_PROMPT_MODIFIER = (base) 
+# environment
+NVM_CD_FLAGS = -q
+# environment
+ZSH = /Users/yango3/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-MAKELEVEL := 0
+CONDA_DEFAULT_ENV = base
+# environment
+XPC_FLAGS = 0x0
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -103,63 +100,85 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # environment
-XDG_SESSION_ID = 14
+JAVA_HOME = /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
+# default
+MAKE_VERSION := 3.81
 # environment
-USER = pi
+USER = yango3
 # makefile
 .DEFAULT_GOAL := 
+# environment
+rvm_version = 1.29.10 (latest)
+# environment
+LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
+# environment
+ZSH_THEME = agnosterzak
+# environment
+CONDA_SHLVL = 1
 # default
-MAKE_COMMAND := make
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # default
 .VARIABLES := 
+# environment
+TMPDIR = /var/folders/dn/xt0yf8bd6v77nbp283_p0hmm0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-LANGUAGE = en_US.UTF-8
+VSCODE_IPC_HOOK = /Users/yango3/Library/Application Support/Code/1.76-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
-MAKEFLAGS = pqrR
+MAKEFLAGS = Rrqp
 # environment
-MFLAGS = -pqrR
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
 # environment
-SSH_CLIENT = 192.168.0.100 63761 22
+NVM_DIR = /Users/yango3/.nvm
 # environment
-MAIL = /var/mail/pi
-# environment
-PICO_PLAYGROUND_PATH = /home/pi/Documents/project/rasp-pico/pico/pico-playground
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x1000001c.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-BROWSER = /home/pi/.vscode-server/bin/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884/bin/helpers/browser.sh
+VSCODE_L10N_BUNDLE_LOCATION = 
+# automatic
++F = $(notdir $+)
 # environment
-NO_AT_BRIDGE = 1
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x2
 # environment
-VSCODE_HANDLES_SIGPIPE = true
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
 # environment
+PAGER = less
+# environment
 LC_ALL = C
+# environment
+NVM_NODEJS_ORG_MIRROR = https://nodejs.org/dist
+# environment
+CONDA_PYTHON_EXE = /Users/yango3/miniconda3/bin/python
 # automatic
 ^F = $(notdir $^)
 # environment
-NVM_DIR = /home/pi/.nvm
+rvm_prefix = /Users/yango3
 # default
 SUFFIXES := 
 # default
-.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# default
-.RECIPEPREFIX := 
+.INCLUDE_DIRS = /usr/local/include
 # environment
-PICO_SDK_PATH = /home/pi/Documents/project/rasp-pico/pico/pico-sdk
-# default
-MAKE_HOST := aarch64-unknown-linux-gnu
+MAKELEVEL := 0
+# environment
+CONDA_PREFIX = /Users/yango3/miniconda3
+# environment
+VSCODE_PID = 16777
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=10/96=10%
+# Load=83/1024=8%, Rehash=0, Collisions=3/104=3%
 
 # Pattern-specific Variable Values
 
@@ -167,7 +186,7 @@ LANG = C
 
 # Directories
 
-# . (device 45826, inode 261030): 20 files, no impossibilities.
+# . (device 16777220, inode 64739016): 20 files, no impossibilities.
 
 # 20 files, no impossibilities in 1 directories.
 
@@ -179,24 +198,38 @@ LANG = C
 
 # Not a target:
 all:
-#  Command line target.
+#  Command-line target.
 #  Implicit rule search has been done.
 #  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 makefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -206,27 +239,29 @@ makefile:
 
 # Not a target:
 GNUmakefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
-# No 'vpath' search paths.
+# No `vpath' search paths.
 
-# No general ('VPATH' variable) search path.
+# No general (`VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 28 / storage = 250 B / avg = 8 B
-# current buf: size = 8162 B / used = 250 B / count = 28 / avg = 8 B
+# # of strings in strcache: 0
+# # of strcache buffers: 0
+# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
+# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# strcache performance: lookups = 31 / hit rate = 9%
-# hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=1/31=3%
-# Finished Make data base on Thu Mar 23 14:21:08 2023
+# Finished Make data base on Mon Mar 27 16:05:44 2023
 
  
-make: *** No rule to make target 'all'.  Stop.
+make: *** No rule to make target `all'.  Stop.
 
