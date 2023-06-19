@@ -60,3 +60,7 @@ $ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin
 $ make
 $ ./output/tx -D /dev/ttyACM0 -S 115200 -B ../bin/lamp421-0322-ota.bin
 ```
+
+
+## 生成OTA bin文件
+
