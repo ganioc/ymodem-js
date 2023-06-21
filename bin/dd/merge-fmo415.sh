@@ -9,10 +9,10 @@ FILESIZE=$(expr 252 \* 1024)
 DATESTR=$(date +%m%d-%H%M)
 
 #OUTPUT="${PROJSTR}-combo-${DATESTR}.bin"
-OUTPUT="fmo415-all-0620.bin"
+OUTPUT="fmo415-all-0621.bin"
 
 INFILE1="../fmobl415-0619-none.bin"
-INFILE2="../fmo415-ota-0620.bin"
+INFILE2="../fmo415-ota-0621.bin"
 
 INFILE1_SIZE=$(ls -l "${INFILE1}" | awk '{print $5}')
 INFILE2_SIZE=$(ls -l "${INFILE2}" | awk '{print $5}')
