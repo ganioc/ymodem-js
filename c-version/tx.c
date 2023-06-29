@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include <time.h>
+#include <sys/ioctl.h>
 
 #include "ymodem.h"
 #include "lib.h"
@@ -44,7 +45,7 @@ static const struct option lopts[] = {
 		{"verbose", optional_argument, 0, 'v'},
 		{"hardflow", required_argument, 0, 'f'},
 		{"dtr", required_argument,0, 'T'},
-		{"rts", required_argument, 0, 'R'}
+		{"rts", required_argument, 0, 'R'},
 		{NULL, 0, 0, 0},
 };
 
