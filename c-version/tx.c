@@ -44,8 +44,8 @@ static const struct option lopts[] = {
 		{"bin", required_argument, 0, 'B'},
 		{"verbose", optional_argument, 0, 'v'},
 		{"hardflow", required_argument, 0, 'f'},
-		{"dtr", required_argument,0, 'T'},
-		{"rts", required_argument, 0, 'R'},
+		{"dtr", no_argument,0, 'T'},
+		{"rts", no_argument, 0, 'R'},
 		{NULL, 0, 0, 0},
 };
 
@@ -68,7 +68,7 @@ static void parse_opts(int argc, char *argv[])
 
 	while (1)
 	{
-		c = getopt_long(argc, argv, "D:S:B:vfh", lopts, NULL);
+		c = getopt_long(argc, argv, "D:S:B:vfhTR", lopts, NULL);
 		if (c == -1)
 		{
 			break;
