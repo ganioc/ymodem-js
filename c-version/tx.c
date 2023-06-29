@@ -34,6 +34,8 @@ static int hardflow = 0;
 static int verbose = 0;
 static char *bin = "../bin/filename.bin.bin.bin.bin";
 static FILE *fp;
+static int dtr = 0;
+static int rts = 0;
 
 static const struct option lopts[] = {
 		{"device", required_argument, 0, 'D'},
@@ -41,6 +43,8 @@ static const struct option lopts[] = {
 		{"bin", required_argument, 0, 'B'},
 		{"verbose", optional_argument, 0, 'v'},
 		{"hardflow", required_argument, 0, 'f'},
+		{"dtr", required_argument,0, 'T'},
+		{"rts", required_argument, 0, 'R'}
 		{NULL, 0, 0, 0},
 };
 
@@ -51,7 +55,9 @@ static void print_usage(const char *prog)
 			 "  -S --speed     uart speed\n"
 			 "  -v --verbose   Verbose (show rx buffer)\n"
 			 "  -f --hardflow  open hardware flowcontrol\n"
-			 "  -B --bin       bin file\n");
+			 "  -B --bin       bin file\n"
+			 "  -T --dtr       DTR active, otherwise inactive\n"
+			 "  -R --rts       RTS active, otherwise inactive\n");
 	exit(1);
 }
 
@@ -85,6 +91,12 @@ static void parse_opts(int argc, char *argv[])
 		case 'B':
 			if (optarg != NULL)
 				bin = optarg;
+			break;
+		case 'T':
+			dtr = 1;
+			break;
+		case 'R':
+			rts = 1;
 			break;
 		case 'h':
 		default:
@@ -244,6 +256,9 @@ static int libtty_setopt(int fd, int speed, int databits, int stopbits, char par
 	cfsetispeed(&newtio, baudrate);
 	cfsetospeed(&newtio, baudrate);
 
+	// add DTR, RTS settings
+
+
 	tcflush(fd, TCIOFLUSH);
 
 	if (tcsetattr(fd, TCSANOW, &newtio) != 0)
@@ -265,6 +280,7 @@ static int libtty_open(const char *devname)
 {
 	int fd = open(devname, O_RDWR | O_NOCTTY | O_NDELAY);
 	int flags = 0;
+	
 
 	if (fd < 0)
 	{
@@ -313,6 +329,7 @@ int main(int argc, char *argv[])
 	char bin_buffer[BIN_BUFFER_SIZE];
 	int read_index = 0, read_len_finished = 0;
 	int status = SUCCESS;
+	unsigned long controlbits = 0;
 
 	PRINTF("hello tx ymodem\n");
 	PRINTF("parse input args:\n");
@@ -348,6 +365,22 @@ int main(int argc, char *argv[])
 	{
 		PRINTF("libtty setting OK\n");
 	}
+
+	// libtty_tiocmset, 
+	if(dtr)
+		controlbits |= TIOCM_DTR;
+	if(rts)
+		controlbits |= TIOCM_RTS;
+
+	ret = ioctl(fd, TIOCMSET, &controlbits);
+
+	if(ret != 0){
+		printf("ioctl dtr, rts failed.\n");
+		goto tag_set_tty;
+	}else
+		printf("ioctl dtr, rts ok.\n");
+
+
 
 	bin_fd = open(bin, O_RDONLY);
 	if (bin_fd < 0)

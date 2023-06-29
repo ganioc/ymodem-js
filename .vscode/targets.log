@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Mon Mar 27 16:05:44 2023
+# Make data base, printed on Mon Apr 10 14:21:06 2023
 
 # Variables
 
@@ -32,7 +32,7 @@ CURDIR := /Users/yango3/Documents/mywork/ruff/power-brd/artery/AT32F415/IAP/ymod
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"en-gb","osLocale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile
@@ -40,7 +40,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_CWD = /
 # environment
-PATH = ~/.cargo/bin:/Users/yango3/.nvm/versions/node/v12.22.0/bin:/Users/yango3/miniconda3/bin:/Users/yango3/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/Library/Apple/usr/bin:/Users/yango3/.cargo/bin:/Users/yango3/.rvm/bin
+PATH = /usr/local/opt/texinfo/bin:~/.cargo/bin:/Users/yango3/.nvm/versions/node/v12.22.0/bin:/Users/yango3/miniconda3/bin:/Users/yango3/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/Library/Apple/usr/bin:/Users/yango3/.cargo/bin:/Users/yango3/.rvm/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -54,7 +54,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.VCgYMwU4T5/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.L2N71GZs2v/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -74,7 +74,7 @@ HOME = /Users/yango3
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/yango3/Library/Application Support/Code/CachedData/ee2b180d582a7f601fa6ecfdad8d9fd269ab1884
+VSCODE_CODE_CACHE_PATH = /Users/yango3/Library/Application Support/Code/CachedData/7f329fe6c66b0f86ae1574c2911b681ad5a45d63
 # environment
 LOGNAME = yango3
 # environment
@@ -126,7 +126,7 @@ TMPDIR = /var/folders/dn/xt0yf8bd6v77nbp283_p0hmm0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/yango3/Library/Application Support/Code/1.76-main.sock
+VSCODE_IPC_HOOK = /Users/yango3/Library/Application Support/Code/1.77-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -138,7 +138,7 @@ MFLAGS = -Rrqp
 # environment
 NVM_DIR = /Users/yango3/.nvm
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x1000001c.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000022.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -172,13 +172,15 @@ SUFFIXES :=
 # environment
 MAKELEVEL := 0
 # environment
+PICO_SDK_PATH = /Users/yango3/Documents/yangjun/project/raspberry/pico/pico-sdk
+# environment
 CONDA_PREFIX = /Users/yango3/miniconda3
 # environment
-VSCODE_PID = 16777
+VSCODE_PID = 31855
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=83/1024=8%, Rehash=0, Collisions=3/104=3%
+# Load=84/1024=8%, Rehash=0, Collisions=3/105=3%
 
 # Pattern-specific Variable Values
 
@@ -186,9 +188,9 @@ LANG = C
 
 # Directories
 
-# . (device 16777220, inode 64739016): 20 files, no impossibilities.
+# . (device 16777220, inode 64739016): 21 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -260,7 +262,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Mon Mar 27 16:05:44 2023
+# Finished Make data base on Mon Apr 10 14:21:06 2023
 
  
 make: *** No rule to make target `all'.  Stop.
