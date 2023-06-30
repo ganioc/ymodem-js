@@ -45,7 +45,8 @@ $ cd build
 $ cmake ..
 $ make
 $ 
-$ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin
+$ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin 
+$ ./tx -D /dev/ttyUSB0 -S 115200 -B ../bin/lamp421-0314-14.bin --dtr --rts
 
 ```
 
